@@ -42,15 +42,23 @@ class BankController extends Controller
             'nominal'=> 'required|integer',
             'rekening'=> 'required|string|exists:wallets,rekening',
         ]);
+        if(auth()->user()->role === 'bank'){
+            $status = 'dikonfirmasi';
+            $wallet = Wallet::where('rekening', $request->rekening)->first();
+            $wallet->saldo += $request->nominal;
+            $wallet->save();
+        }else{
+            $status = 'menunggu';
+        }
+
         $kodeUnik = 'TU' . auth()->user()->id . now()->format('dmYhis');
-        session(['current_kodeUnik' => $kodeUnik]);
         $request = TopUp::create([
             'rekening'=> $request->rekening,
             'nominal'=> $request->nominal,
             'kode_unik'=> $kodeUnik,
-            'status'=> 'menunggu',  
+            'status'=> $status,  
         ]);
-        return redirect()->route('siswa.index')->with('success', 'Topup Berhasil');
+        return redirect()->back()->with('success', 'Topup Berhasil');
     }
 
     /**
@@ -96,14 +104,23 @@ class BankController extends Controller
         if($wallet->saldo < $request->nominal){
             return redirect()->back()->with('error', 'Saldo tidak cukup');
         }
+        if(auth()->user()->role === 'bank'){
+            $status = 'dikonfirmasi';
+            $wallet = Wallet::where('rekening', $request->rekening)->first();
+            $wallet->saldo -= $request->nominal;
+            $wallet->save();
+        }else{
+            $status = 'menunggu';
+        }
+
         $kodeUnik = 'WD' . auth()->user()->id . now()->format('dmYhis');
         $withdrawals = Withdrawal::create([
             'rekening'=> $request->rekening,
             'nominal'=> $request->nominal,
             'kode_unik'=> $kodeUnik,
-            'status'=> 'menunggu',
+            'status'=> $status,
         ]);
-        return redirect()->route('siswa.index')->with('success','Permintaan withdrawal berhasil');
+        return redirect()->back()->with('success','WIthdrawal berhasil');
     }
 
     /**

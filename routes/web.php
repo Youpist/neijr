@@ -24,6 +24,8 @@ Route::post('/', [AuthController::class,'store']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/cetak/transaksi', [TransaksiController::class, 'cetakInvoice'])->name('cetak.transaksi');
+Route::post('/topup', [BankController::class, 'topup'])->name('topup');
+Route::post('/withdrawal', [BankController::class, 'withdrawal'])->name('withdrawal');
 
 // Bank
 Route::middleware(['auth','userAkses:bank'] )->group(function(){
@@ -50,8 +52,6 @@ Route::middleware(['auth','userAkses:bank'] )->group(function(){
 Route::middleware(['auth','userAkses:customer'] )->group(function(){
     Route::get('/siswa', [DashboardController::class, 'siswaIndex'])->name('siswa.index');
 
-    Route::post('/siswa/topup', [BankController::class, 'topup'])->name('siswa.topup');
-    Route::post('/siswa/withdrawal', [BankController::class, 'withdrawal'])->name('siswa.withdrawal');
     Route::get('/siswa/kantin', [TransaksiController::class, 'customerKantinIndex'])->name('siswa.kantin');
     Route::post('/siswa/tambahKeranjang/{id}', [TransaksiController::class, 'addTocart'])->name('addToCart');
     Route::get('/siswa/keranjang', [TransaksiController::class, 'keranjangIndex'])->name('siswa.keranjang');
