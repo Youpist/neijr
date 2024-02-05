@@ -46,9 +46,9 @@
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-5">
                     <div class="card-group d-block d-md-flex row">
-                        <div class="card col-md-7 p-4 mb-0">
+                        <div class="card col-md-3 p-4 mb-0">
                             <div class="row text-center">
                                 <h1 style="color: blue">Fintech</h1>
                             </div>
@@ -59,26 +59,28 @@
                                     @csrf
                                     <div class="input-group mb-3"><span class="input-group-text">
 
-                                        <svg class="icon">
-                                            <use
-                                                xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user') }}">
-                                            </use>
-                                        </svg></span>
-                                    <input class="form-control" type="email" placeholder="Email" name="email">
-                                </div>
-                                <div class="input-group mb-4"><span class="input-group-text">
-                                        <svg class="icon">
-                                            <use
-                                                xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}">
-                                            </use>
-                                        </svg></span>
-                                    <input class="form-control" type="password" placeholder="Password" name="password">
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <button class="btn btn-primary px-4 col-sm-8  " type="submit">Login</button>
+                                            <svg class="icon">
+                                                <use
+                                                    xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user') }}">
+                                                </use>
+                                            </svg></span>
+                                        <input class="form-control" type="email" placeholder="Email" name="email">
                                     </div>
-                                </div>
+                                    <div class="input-group mb-4"><span class="input-group-text">
+                                            <svg class="icon">
+                                                <use
+                                                    xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}">
+                                                </use>
+                                            </svg></span>
+                                        <input class="form-control" type="password" placeholder="Password"
+                                            name="password">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button class="btn btn-primary px-4 col-sm-8  "
+                                                type="submit">Login</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
