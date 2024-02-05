@@ -200,7 +200,7 @@ class BankController extends Controller
         ->orderBy('tanggal', 'desc')
         ->get();
         $totalNominal = $withdrawals->sum('nominal');
-        return view('bank.laporan.withdrawal-harian', compact('title', 'withdrawals', 'totalNominal'));
+        return view('bank.laporan.withdrawal-harian', compact('title', 'withdrawals', 'totalNominal',));
     }
 
     public function laporanWithdrawal($tanggal){

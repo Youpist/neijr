@@ -32,8 +32,10 @@
                                                             <p class="fw-bold mb-1 me-3">{{ $list->kode_unik }} <span
                                                                     class="float-end">{{ $list->created_at }}</span>
                                                             </p>
-                                                            <p class="text-muted mb-0">Rp.
+                                                            <p class="text-muted mb-0 me-3">Rp.
                                                                 {{ number_format($list->nominal, 2, ',', '.') }}
+                                                                <span
+                                                                    class="float-end">Rek:{{ implode(' ', str_split(str_replace(',', '', $list->wallet->rekening), 4)) }}</span>
                                                             </p>
                                                         </div>
                                                     </div>

@@ -19,6 +19,6 @@ class UserAkses
 
             return $next($request);
         }
-        return redirect()->route('blocked');
+        return abort(403);
     }
 }
