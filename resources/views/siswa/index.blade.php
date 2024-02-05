@@ -22,8 +22,8 @@
                         <div class="text-end me-2">
                             <button type="button" class="btn btn-light my-3 mr-3" data-coreui-toggle="modal"
                                 data-coreui-target="#topupModal">Top Up</button>
-                            {{-- <button type="button" class="btn btn-light my-3 mr-3" data-coreui-toggle="modal"
-                                data-coreui-target="#tariktunaiModal">Tarik Tunai</button> --}}
+                            <button type="button" class="btn btn-light my-3 mr-3" data-coreui-toggle="modal"
+                                data-coreui-target="#tariktunaiModal">Tarik Tunai</button>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                 </div>
             </div>
 
-            {{-- <div class="modal fade" id="tariktunaiModal" tabindex="-1" role="dialog"
+            <div class="modal fade" id="tariktunaiModal" tabindex="-1" role="dialog"
                 aria-labelledby="tariktunaiModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -138,7 +138,7 @@
                                 <span>&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('siswa.withdrawal') }}" method="post">
+                        <form action="{{ route('withdrawal') }}" method="post">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
@@ -167,6 +167,6 @@
                         </form>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     @endsection

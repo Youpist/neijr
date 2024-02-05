@@ -20,7 +20,7 @@ class ProdukSeeder extends Seeder
                 'harga'=> 1000,
                 'desc'=> 'Cina tanpa toko',
                 'foto'=>'default.png',
-                'id_kategori'=> 1
+                'id_kategori'=> 8
             ]
             ];
             foreach($dataProduk as $key => $val){

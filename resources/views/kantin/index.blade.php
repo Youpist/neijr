@@ -50,5 +50,40 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Daftar Produk</h4>
+                <div class="data-tables mt-3">
+                    <table id="table2" class="table table-bordered table-hover">
+                        <thead class="bg-light text-capitalize">
+                            <tr>
+                                <th>No.</th>
+                                <th>Produk</th>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Kategori</th>
+                                <th>Desc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($produks as $i => $produk)
+                                <tr>
+                                    <td>{{ $i + 1 }}</td>
+                                    <td class="text-center"><img src="{{ asset('./storage/produk/' . $produk->foto) }}"
+                                            alt="{{ $produk->nama_produk }}" style="width: 100px;"></td>
+                                    <td>{{ $produk->nama_produk }}</td>
+                                    <td>Rp.{{ number_format($produk->harga, 0, ',', '.') }},00</td>
+                                    <td>{{ $produk->stok }}</td>
+                                    <td>{{ $produk->kategori->nama_kategori }}</td>
+                                    <td>{{ $produk->desc }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

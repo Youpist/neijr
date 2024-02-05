@@ -1,6 +1,6 @@
-@extends('layout.main')
+@extends('layout.main_nomenu')
 
-@section('content')
+@section('konten')
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12 mt-5">

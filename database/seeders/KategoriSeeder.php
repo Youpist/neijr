@@ -15,8 +15,11 @@ class KategoriSeeder extends Seeder
     {
         $dataKategori = [
             [
+                'nama_kategori'=> 'Lainnya',
+            ],
+            [
                 'nama_kategori'=> 'Makanan',
-            ]
+            ],
             ];
             foreach($dataKategori as $key => $val){
                Kategori::create($val);
