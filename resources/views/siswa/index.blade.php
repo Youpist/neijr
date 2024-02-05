@@ -41,7 +41,8 @@
                             </div>
                         </div>
                         <div class="text-start mt-3">
-                            <h3 class="mb-0 ms-3">{{ $wallets->rekening }}</h3>
+                            <h3 class="mb-0 ms-3">{{ implode(' ', str_split(str_replace(',', '', $wallets->rekening), 3)) }}
+                            </h3>
                             <p></p>
                         </div>
 
