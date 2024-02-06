@@ -10,7 +10,7 @@
                             <div class="invoice-head">
                                 <div class="row">
                                     <div class="iv-left col-6">
-                                        <span>CHECKOUT</span>
+                                        <span>INVOICE</span>
                                     </div>
                                     <div class="iv-right col-6 text-md-end  float-end">
                                         <span>{{ $invoice }}</span>
@@ -20,7 +20,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <div class="invoice-address">
-                                        <h3>Checkout</h3>
+                                        <h3>INVOICE</h3>
                                         <h5>{{ auth()->user()->name }}</h5>
                                         <p>{{ auth()->user()->email }}</p>
                                     </div>
