@@ -74,7 +74,8 @@
                                                     xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user') }}">
                                                 </use>
                                             </svg></span>
-                                        <input class="form-control" type="email" placeholder="Email" name="email">
+                                        <input class="form-control" type="email" placeholder="Email"
+                                            name="email">
                                     </div>
                                     <div class="input-group mb-4"><span class="input-group-text">
                                             <svg class="icon">
@@ -95,7 +96,7 @@
                                             name="confirmPassword">
                                     </div>
                                     <div class="row">
-                                        <p>Sudah mempunyai akun? <a href="/index">Login!</a></p>
+                                        <p>Sudah mempunyai akun? <a href="{{ url()->previous() }}">Login!</a></p>
                                         <div class="col-6">
                                             <button class="btn btn-primary px-4 col-sm-8  "
                                                 type="submit">Register</button>

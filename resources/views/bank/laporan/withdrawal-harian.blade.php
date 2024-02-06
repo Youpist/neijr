@@ -13,10 +13,11 @@
                             <div class="list-group list-group-flush">
                                 @foreach ($withdrawals as $withdrawal)
                                     <h6 class="bg-body-tertiary p-2 border-top border-bottom">{{ $withdrawal->tanggal }}
-                                        <span class="float-end">Rp.{{ number_format($withdrawal->nominal, 0, ',', '.') }}</span>
+                                        <span
+                                            class="float-end">Rp.{{ number_format($withdrawal->nominal, 0, ',', '.') }}</span>
                                     </h6>
                                     @php
-                                        $withdrawalList = App\Models\Withdrawal::where(DB::raw('DATE(created_at)'), $withdrawal->tanggal,   )
+                                        $withdrawalList = App\Models\Withdrawal::where(DB::raw('DATE(created_at)'), $withdrawal->tanggal)
                                             // ->where('rekening', $wallet->rekening)
                                             ->orderBy('created_at', 'desc')
                                             ->get();
@@ -30,9 +31,9 @@
                                                     <div class="d-flex align-items-center col-12">
                                                         <div class="ms-3 col-12">
                                                             <p class="fw-bold mb-1 me-3">{{ $list->kode_unik }} <span
-                                                                   class="float-end">{{ $list->created_at }}</span>
+                                                                    class="float-end">{{ $list->created_at }}</span>
                                                             </p>
-                                                            <p class="text-muted mb-0">Rp.
+                                                            <p class="text-danger mb-0">- Rp.
                                                                 {{ number_format($list->nominal, 2, ',', '.') }}
                                                             </p>
                                                         </div>

@@ -12,6 +12,8 @@
                             <h4 class="header-title">Riwayat Withdrawal</h4>
                             <div class="list-group list-group-flush">
                                 @foreach ($withdrawals as $withdrawal)
+                                <a href="{{ route('cetak.withdrawal.all') }}" class="btn btn-danger col-2">Cetak Seluruh</a>
+
                                     <h6 class="bg-body-tertiary p-2 border-top border-bottom">{{ $withdrawal->tanggal }}
                                         <span
                                             class="float-end">Rp.{{ number_format($withdrawal->nominal, 0, ',', '.') }}</span>
@@ -25,19 +27,20 @@
 
                                     <ul class="list-group list-group-light mb-4">
                                         @foreach ($withdrawalList as $list)
-                                            <li
-                                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                                <div class="d-flex align-items-center col-12">
-                                                    <div class="ms-3 col-12">
-                                                        <p class="fw-bold mb-1 me-3">{{ $list->kode_unik }} <span
-                                                                class="float-end">{{ $list->created_at }}</span>
-                                                        </p>
-                                                        <p class="text-danger mb-0 ">- Rp.
-                                                            {{ number_format($list->nominal, 2, ',', '.') }}
-                                                        </p>
+                                            <a href="{{ route('cetak.withdrawal', $withdrawal->tanggal) }}">
+                                                <li
+                                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center col-12">
+                                                        <div class="ms-3 col-12">
+                                                            <p class="fw-bold mb-1 me-3">{{ $list->kode_unik }} <span
+                                                                    class="float-end">{{ $list->created_at }}</span>
+                                                            </p>
+                                                            <p class="text-danger mb-0 ">- Rp.
+                                                                {{ number_format($list->nominal, 2, ',', '.') }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
                                             </a>
                                         @endforeach
                                     </ul>

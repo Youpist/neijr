@@ -172,24 +172,6 @@ class BankController extends Controller
         return view('bank.laporan.topup-detail', compact('title', 'topups', 'tanggal', 'totalNominal'));
     }
 
-    public function cetakTopup(){
-        $kodeUnik = session('current_kodeUnik');
-        $topups = TopUp::where('kode_unik', $kodeUnik)->get();
-        $totalNominal = $topups->sum('nominal');
-
-        $selectedTopups = [];
-        foreach ($topups as $topup) {
-            $siswa = TopUp::find($topup->kode_unik);
-
-            $selectedTopups[] = [
-                'topup'=>$topup,
-                'tanggal' => $topup->created_at,
-                'nominal' => $topup->nominal,
-            ];
-           } 
-           session()->forget('current_kodeUnik');   
-           return view('cetak.topup-bank', compact('selectedTopups', 'totalNominal', 'kodeUnik'));
-        }
     public function laporanWithdrawalHarian(){
         $title = 'Laporan Topup Harian';
 
@@ -206,13 +188,49 @@ class BankController extends Controller
     public function laporanWithdrawal($tanggal){
     $title = 'Laporan withdrawal';
 
-    $tanggal = date(',Y-m-d', strtotime($tanggal));
+    $tanggal = date('Y-m-d', strtotime($tanggal));
     $withdrawals = Withdrawal::where(DB::raw('DATE(created_at)'), $tanggal,)
     ->get();
     $totalNominal = $withdrawals->sum('nominal');
 
     return view('bank.laporan.withdrawal-detail', compact('title', 'withdrawals', 'tanggal', 'totalNominal'));
     }
+    public function cetakTopup($tanggal){
+
+    $tanggal = date('Y-m-d', strtotime($tanggal));
+    $topups = TopUp::where(DB::raw('DATE(created_at)'), $tanggal,)
+    ->get();
+    $totalNominal = $topups->sum('nominal');
+
+    return view('cetak.cetak-topup', compact('topups', 'tanggal', 'totalNominal'));
+    }
+    public function cetakTopupAll(){
+        $topups = TopUp::select(DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(nominal) as nominal'))
+        ->groupBy('tanggal')
+        ->orderBy('tanggal', 'desc')
+        ->get();
+        $totalNominal = $topups->sum('nominal');
+        return view('cetak.cetak-topup-all', compact('topups', 'totalNominal'));
+    }
+    public function cetakWithdrawalAll(){
+        $withdrawals = Withdrawal::select(DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(nominal) as nominal'))
+        ->groupBy('tanggal')
+        ->orderBy('tanggal', 'desc')
+        ->get();
+        $totalNominal = $withdrawals->sum('nominal');
+        return view('cetak.cetak-withdrawal-all', compact('withdrawals', 'totalNominal'));
+    }
+
+    public function cetakWithdrawal($tanggal){
+
+        $tanggal = date('Y-m-d', strtotime($tanggal));
+        $withdrawals = Withdrawal::where(DB::raw('DATE(created_at)'), $tanggal,)
+        ->get();
+        $totalNominal = $withdrawals->sum('nominal');
+    
+        return view('cetak.cetak-withdrawal', compact('withdrawals', 'tanggal', 'totalNominal'));
+        }
+
 
     // Untuk Siswa
     public function riwayatTopup(){

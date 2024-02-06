@@ -47,7 +47,7 @@ Route::middleware(['auth','userAkses:bank'] )->group(function(){
     Route::get('/bank/laporan/withdrawal/{tanggal}', [BankController::class, 'laporanWithdrawal'])->name('withdrawal.detail');
 
     // Cetak Bank
-    Route::get('/bank/cetak/topup', [BankController::class, 'cetakTopup'])->name('bank.cetak.topup');
+    // Route::get('/bank/cetak/topup', [BankController::class, 'cetakTopup'])->name('bank.cetak.topup');
 });
 
 // Siswa
@@ -63,6 +63,10 @@ Route::middleware(['auth','userAkses:customer'] )->group(function(){
     // Riwayat
     Route::get('/siswa/riwayat/transaksi', [TransaksiController::class, 'riwayatTransaksi'])->name('riwayat.transaksi');
     Route::get('/siswa/riwayat/topup', [BankController::class, 'riwayatTopup'])->name('riwayat.topup');
+    Route::get('/laporan/topup/{tanggal}', [BankController::class, 'cetakTopup'])->name('cetak.topup');
+    Route::get('/laporan/withdrawal/{tanggal}', [BankController::class, 'cetakWithdrawal'])->name('cetak.withdrawal');
+    Route::get('/laporan/topupAll', [BankController::class, 'cetakTopupAll'])->name('cetak.topup.all');
+    Route::get('/laporan/withdrawalAll', [BankController::class, 'cetakWithdrawalAll'])->name('cetak.withdrawal.all');
     Route::get('/siswa/riwayat/withdrawal', [BankController::class, 'riwayatWithdrawal'])->name('riwayat.withdrawal');
     Route::get('/siswa/riwayat/transaksi/{invoice}', [TransaksiController::class, 'detailRiwayatTransaksi'])->name('riwayat.detail');
 });
