@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use App\Models\Kategori;
+use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -39,13 +40,30 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        $ignore = Produk::onlyTrashed()->where('nama_produk', $request->nama_produk)->first();
+        if($ignore){
+            $foto = $request->file('foto');
+            $foto->storeAs('public/produk', $foto->hashName());
+
+            $ignore->restore();
+            $ignore->harga = $request->harga;
+            $ignore->stok = $request->stok;
+            $ignore->desc = $request->desc;
+            $ignore->id_kategori = $request->id_kategori;
+            $ignore->foto = $foto->hashName();
+            $ignore->save();
+        }
         $request->validate([
-            'nama_produk'=> 'required|string|max:255|unique:produks,nama_produk',
-            'harga'=> 'required|numeric',
-            'stok'=> 'required|numeric',
-            'foto'=> 'image|mimes:jpeg,jpg,png|max:2048',
-            'desc'=> 'required',
+            'nama_produk'=> [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('produks', 'nama_produk')->ignore($ignore->id ?? 0),
+            ],
             'id_kategori'=> 'required|exists:kategoris,id',
+            'harga'=>'required|numeric',
+            'stok'=>'required|numeric',
+            'desc'=>'required',
         ]);
 
         $existsProduk = Produk::where('nama_produk', $request->nama_produk)->first();
@@ -122,7 +140,12 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrfail($id);
 
-        Storage::delete('public/produk' . $produk->image);
+        $keranjangs = Keranjang::where('id_produk', $id)->get();
+        
+        foreach($keranjangs as $keranjang){
+            $keranjang->delete();
+        }
+        Storage::delete('public/produk/' . $produk->image);
         $produk->delete();
 
         return redirect()->back()->with('success','Berhasil menghapus data produk');

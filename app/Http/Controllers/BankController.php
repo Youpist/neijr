@@ -186,7 +186,7 @@ class BankController extends Controller
                 'tanggal' => $topup->created_at,
                 'nominal' => $topup->nominal,
             ];
-           }
+           } 
            session()->forget('current_kodeUnik');   
            return view('cetak.topup-bank', compact('selectedTopups', 'totalNominal', 'kodeUnik'));
         }
@@ -206,7 +206,7 @@ class BankController extends Controller
     public function laporanWithdrawal($tanggal){
     $title = 'Laporan withdrawal';
 
-    $tanggal = date('Y-m-d', strtotime($tanggal));
+    $tanggal = date(',Y-m-d', strtotime($tanggal));
     $withdrawals = Withdrawal::where(DB::raw('DATE(created_at)'), $tanggal,)
     ->get();
     $totalNominal = $withdrawals->sum('nominal');

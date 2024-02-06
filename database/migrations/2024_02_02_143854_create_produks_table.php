@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer('stok');
             $table->text('foto');
             $table->text('desc');
-            $table->unsignedBigInteger('id_kategori');
+            $table->foreignId('id_kategori')->constrained('kategoris')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -21,6 +21,8 @@ use App\Http\Controllers\TransaksiController;
 // Auth
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('/', [AuthController::class,'store']);
+Route::get('/register', [AuthController::class, 'regist']);
+Route::post('/register', [AuthController::class, 'register'])->name('regist');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/cetak/transaksi', [TransaksiController::class, 'cetakInvoice'])->name('cetak.transaksi');

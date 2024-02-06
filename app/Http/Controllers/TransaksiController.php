@@ -148,7 +148,7 @@ class TransaksiController extends Controller
 
             $selectedProduks = [];
             foreach ($transaksis as $transaksi){
-                $produk = Produk::find($transaksi->id_produk);
+                $produk = Produk::withTrashed()->find($transaksi->id_produk);
 
                 $selectedProduks []= [
                     'produk'=> $produk,
@@ -204,6 +204,7 @@ class TransaksiController extends Controller
 
     $selectedProduks = Transaksi::where('invoice', $invoice )->get();
     $totalHarga = $selectedProduks->sum('total_harga');
+    session(['current_invoice'=> $invoice]);
 
     return view('siswa.invoice', compact('title', 'totalHarga', 'invoice','selectedProduks'));
    }

@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    @foreach ($produks as $produk)
+    
         <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -119,6 +119,7 @@
                 </div>
             </div>
         </div>
+        @foreach ($produks as $produk)
         <div class="modal fade" id="editModal{{ $produk->id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $produk->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg">

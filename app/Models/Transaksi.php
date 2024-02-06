@@ -14,7 +14,7 @@ class Transaksi extends Model
     protected $guarded = [];
 
     public function produk(){
-        return $this->belongsTo(Produk::class, 'id_produk');
+        return $this->belongsTo(Produk::class, 'id_produk')->withTrashed();
     }
     public function user(){
         return $this->belongsTo(User::class, 'id_user');

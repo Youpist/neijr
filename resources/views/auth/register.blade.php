@@ -55,8 +55,18 @@
                             <div class="card-body">
                                 <h1>Login</h1>
                                 <p class="text-medium-emphasis">Sign In to your account</p>
-                                <form action="" method="post" role="form">
+                                <form action="{{ route('regist') }}" method="post" role="form">
                                     @csrf
+                                    <input type="hidden" role="customer">
+                                    <div class="input-group mb-3"><span class="input-group-text">
+
+                                            <svg class="icon">
+                                                <use
+                                                    xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-user') }}">
+                                                </use>
+                                            </svg></span>
+                                        <input class="form-control" type="text" placeholder="Name" name="name">
+                                    </div>
                                     <div class="input-group mb-3"><span class="input-group-text">
 
                                             <svg class="icon">
@@ -75,11 +85,20 @@
                                         <input class="form-control" type="password" placeholder="Password"
                                             name="password">
                                     </div>
+                                    <div class="input-group mb-4"><span class="input-group-text">
+                                            <svg class="icon">
+                                                <use
+                                                    xlink:href="{{ asset('assets/vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}">
+                                                </use>
+                                            </svg></span>
+                                        <input class="form-control" type="password" placeholder="Password Konfirmasi"
+                                            name="confirmPassword">
+                                    </div>
                                     <div class="row">
-                                        <p>Belum mempunyai akun? <a href="/register">Register!</a></p>
+                                        <p>Sudah mempunyai akun? <a href="/index">Login!</a></p>
                                         <div class="col-6">
                                             <button class="btn btn-primary px-4 col-sm-8  "
-                                                type="submit">Login</button>
+                                                type="submit">Register</button>
                                         </div>
                                     </div>
                                 </form>
